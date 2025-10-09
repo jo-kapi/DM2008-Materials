@@ -24,7 +24,7 @@ Each week corresponds to a topic covered in class:
 
 Within each week, you’ll find folders for specific **activities**, **readings**, or **mini-projects** used during class.
 
-> ⚠️ Weeks 09–13 focus on Arduino, data, and final projects — materials will be added progressively.
+> ⚠️ Weeks 09–13 focus on Arduino, simple UIs, and final projects — materials will be added progressively.
 
 ---
 
@@ -66,7 +66,7 @@ All original teaching materials © jo+kapi / Nanyang Technological University, S
 1. **Clone or Download** this repository to your computer.
 
    ```bash
-   git https://github.com/jo-kapi/DM2008-Materials.git
+   git clone https://github.com/jo-kapi/DM2008-Materials.git
    ```
 
 2. Open any project folder in VS Code.
