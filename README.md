@@ -7,7 +7,7 @@ It serves as the single reference point for in-class activities, demos, and code
 
 ### `weekly_lessons/`
 
-Weekly folders containing class demos and activities.
+Weekly folders containing class demos, examples and activities.
 
 Each week corresponds to a topic covered in class:
 | Folder | Focus |
@@ -18,13 +18,12 @@ Each week corresponds to a topic covered in class:
 | `week_04` | Object-Oriented Programming (Part 1) |
 | `week_05` | Object-Oriented Programming (Part 2) |
 | `week_06` | Media Loading |
+| `week_07` | Local Tooling (Student Repo Template) |
 | `week_08` | Arduino Basics |
 
 Within each week, you’ll find folders for specific **activities**, **readings**, or **mini-projects** used during class.
 
 > ⚠️ Weeks 09–13 focus on Arduino, simple UIs, and final projects — materials will be added progressively.
-
-> ⚠️ Week 7 involves this repo and the [Notion Companion](https://creative-coding.notion.site/DM2008-Companion-247b682052028078a36bdae76f4042d2), thus there is intentionally no folder catered for it.
 
 ---
 
@@ -114,6 +113,7 @@ Launch **Live Server** to preview sketches in your browser.
 You’ll learn to think computationally, experiment fearlessly, and build interactive experiences that connect screen, sound, and sensor.
 
 The course emphasizes:
+
 - Playful experimentation
 - Confidence through process and iteration
 - Embracing debugging and “productive confusion” as part of learning
