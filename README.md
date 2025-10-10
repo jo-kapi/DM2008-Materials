@@ -23,6 +23,7 @@ Each week corresponds to a topic covered in class:
 Within each week, you’ll find folders for specific **activities**, **readings**, or **mini-projects** used during class.
 
 > ⚠️ Weeks 09–13 focus on Arduino, simple UIs, and final projects — materials will be added progressively.
+
 > ⚠️ Week 7 involves this repo and the [Notion Companion](https://creative-coding.notion.site/DM2008-Companion-247b682052028078a36bdae76f4042d2), thus there is intentionally no folder catered for it.
 
 ---
@@ -74,7 +75,7 @@ You can access the course materials in two ways:
 5. Click **Clone**.
 6. Once cloned, open the folder in **VS Code** and use **Live Server** to preview sketches in the browser.
 
-> 🪄 Tip: Use GitHub Desktop to **commit** and **push** your own project progress later in the semester (Week 7 onward).
+> 🪄 Use GitHub Desktop to **commit** and **push** your own project progress later in the semester (Week 7 onward).
 
 ---
 
@@ -95,17 +96,17 @@ Launch **Live Server** to preview sketches in your browser.
 
 ## 🧩 Tooling Overview
 
-• **Editor:** VS Code + Live Server
-• **Version Control:** GitHub Desktop
-• **Libraries:** p5.js, p5.sound
-• **Physical Computing:** Arduino Uno (Weeks 8–9)
-• **AI Assistants:** ChatGPT, Claude, or GitHub Copilot (introduced mid-semester)
+- **Editor:** VS Code + Live Server
+- **Version Control:** GitHub Desktop
+- **Libraries:** p5.js, p5.sound
+- **Physical Computing:** Arduino Uno (Weeks 8–9)
+- **AI Assistants:** ChatGPT, Claude, or GitHub Copilot (introduced mid-semester)
 
 ## 📚 References
 
-• _Getting Started with p5.js_ — McCarthy, Reas, Fry (O’Reilly, 2015)
-• _The Nature of Code_ — Daniel Shiffman (No Starch Press, 2024)
-• _Code as a Creative Medium_ — Levin & Brain (MIT Press, 2021)
+- _Getting Started with p5.js_ — McCarthy, Reas, Fry (O’Reilly, 2015)
+- _The Nature of Code_ — Daniel Shiffman (No Starch Press, 2024)
+- _Code as a Creative Medium_ — Levin & Brain (MIT Press, 2021)
 
 ## 🧑‍🏫 About This Course
 
@@ -113,9 +114,9 @@ Launch **Live Server** to preview sketches in your browser.
 You’ll learn to think computationally, experiment fearlessly, and build interactive experiences that connect screen, sound, and sensor.
 
 The course emphasizes:
-• Playful experimentation
-• Confidence through process and iteration
-• Embracing debugging and “productive confusion” as part of learning
+- Playful experimentation
+- Confidence through process and iteration
+- Embracing debugging and “productive confusion” as part of learning
 
 The accompanying slides to this course can be [viewed here](https://slides.com/joanneho/dm2008-s1-2526/fullscreen).
 
