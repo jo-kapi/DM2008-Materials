@@ -20,6 +20,7 @@ Each week corresponds to a topic covered in class:
 | `week_06` | Media Loading |
 | `week_07` | Local Tooling (Student Repo Template) |
 | `week_08` | Arduino Basics |
+| `week_09` | Sensor to Screen (Sensor Jam Template) |
 
 Within each week, you’ll find folders for specific **activities**, **readings**, or **mini-projects** used during class.
 
