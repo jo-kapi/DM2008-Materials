@@ -1,7 +1,9 @@
 let port; // Serial Communication port
 let connectBtn;
 
-let sensorVal, circleSize;
+let sensorVal;
+let circleSize = 50;
+let targetSize = 50; // used for Option 2
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -22,10 +24,24 @@ function draw() {
     sensorVal = port.readUntil("\n");
     // Only log data that has information, not empty signals
     if (sensorVal[0]) {
+      // Once you verify data is coming in,
+      // disable logging to improve performance
       console.log(sensorVal);
-      // Update circle's size with sensor's data
+
+      // OPTION 1:
+      // Update circle's size with sensor's data directly
       // Reduce delay() value in Ardiuno to get smoother changes
-      circleSize = sensorVal;
+
+      // use float() to convert from data from string to number
+      // circleSize = float(sensorVal);
+
+      // OPTION 2:
+      // Update circle's size using lerp() to smoothly change values
+      // This method even works with longer delay() values in Arduino
+
+      targetSize = float(sensorVal);
+      // last value in lerp() controls speed of change
+      circleSize = lerp(circleSize, targetSize, 0.1);
     }
   }
 }
