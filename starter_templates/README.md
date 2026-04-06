@@ -50,19 +50,24 @@ p5-only/
 
 ### What's Included
 
-- **`sketch.js`** — Pre-set with a `setup()` and `draw()` function and a 400×400 canvas. Change `createCanvas(400, 400)` to `createCanvas(windowWidth, windowHeight)` for a fullscreen canvas.
-- **`helper.js`** — Handles two things automatically. Don't edit it unless you know what you're doing:
-  - **Auto-resize:** If your canvas is fullscreen, it will resize correctly when the browser window changes size.
-  - **Cursor hide:** The cursor hides automatically after 5 seconds of inactivity — useful for interactive installations.
-- **`style.css`** — The page background colour and canvas drop shadow are controlled via CSS variables at the top of this file. Edit these to customise the look of your page.
-- **`assets/`** — Place any images, sounds, or other media here. The included `dog.jpg` is just an example — delete or replace it.
-- **`documentation/`** — Use this folder to store screenshots or stills of your finished project. The included `project-still-01.jpg` is a placeholder.
+| File / Folder        | Purpose                               | Notes                                                                                                                                                                                                                 |
+| -------------------- | ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`sketch.js`**      | Your main p5.js code                  | Pre-set with `setup()`, `draw()`, and a 400×400 canvas. Change to `createCanvas(windowWidth, windowHeight)` for fullscreen.                                                                                           |
+| **`helper.js`**      | Auto-resize and cursor-hide utilities | Auto-resizes fullscreen canvases on window resize. Hides the cursor after 5 seconds of inactivity. **Do not edit.**                                                                                                   |
+| **`style.css`**      | Page and canvas styling               | Background color and canvas drop shadow are set as CSS variables at the top of the file — edit these to customise your page. This only affects the presentation when your canvas is set to specific pixel dimensions. |
+| **`normalize.css`**  | Browser reset styles                  | Ensures consistent rendering across browsers. **Do not edit.**                                                                                                                                                        |
+| **`assets/`**        | Your media files                      | Place images, sounds, or other media here. The included `dog.jpg` is a placeholder — delete or replace it.                                                                                                            |
+| **`documentation/`** | Project documentation                 | Store screenshots or stills of your finished project here. The included `project-still-01.jpg` is a placeholder.                                                                                                      |
 
 ---
 
 ## 🔌 `p5-arduino/`
 
 Everything in `p5-only/`, plus the setup needed to receive Serial data from an Arduino via USB.
+
+> **⚠️ This template uses p5.webserial, which only works in Google Chrome.**
+>
+> Make sure you're using Chrome when running Arduino-connected sketches. Other browsers are not supported.
 
 ### Folder Structure
 
@@ -98,27 +103,35 @@ p5-arduino/
 
 ### What's Different from `p5-only/`
 
-- **`p5.webserial.js`** — Included in `js/` and linked in `index.html`. Handles Serial communication between the browser and Arduino.
-- **`sketch.js`** — Pre-configured with Serial setup. Key things to know:
-  - `port` and `createSerial()` are set up in `setup()` — **do not remove or rename `port`**.
-  - In `draw()`, incoming data is read with `port.readUntil("\n")` and stored in `serialData`.
-  - Use `float(serialData)` to convert the incoming string to a number before using it in calculations.
-  - The `connectBtnClicked()` function at the bottom handles opening/closing the port — **do not remove it**.
-- **`helper.js`** — In addition to auto-resize and cursor-hide behaviour, this version also:
-  - Automatically injects a **Connect Arduino** button into the page.
-  - Updates the button label to reflect connection status (Connecting… / Disconnect Arduino).
-  - Fades the button out after 5 seconds of mouse inactivity — it reappears on mouse movement.
-- **`arduino/sketch/sketch.ino`** — A minimal Arduino sketch that sends a value over Serial once per loop. By default it sends a random number (0–1023) as a placeholder. Replace `random(1024)` with a real sensor read when you're ready. Make sure the baud rate in the `.ino` file matches `port.open()` in `sketch.js` — both are set to `9600` by default.
+| File / Folder                   | Purpose                                                | Notes                                                                                                                                                   |
+| ------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| \*_`p5.webserial.js`_           | Serial communication between browser and Arduino       | Linked in `index.html`. **Chrome only.** Do not edit.                                                                                                   |
+| **`sketch.js`**                 | Your main p5.js code, pre-configured for Serial        | See notes below.                                                                                                                                        |
+| **`helper.js`**                 | All `p5-only/` utilities, plus Connect button handling | Injects a Connect Arduino button, updates its label on connection state changes, and fades it out after 5 seconds of mouse inactivity. **Do not edit.** |
+| **`arduino/sketch/sketch.ino`** | Arduino sketch to upload to your board                 | See notes below.                                                                                                                                        |
+
+#### `sketch.js` — things not to touch
+
+- `port` and `createSerial()` are set up in `setup()` — **do not remove or rename `port`**.
+- In `draw()`, incoming data is read with `port.readUntil("\n")` and stored in `serialData`.
+- Use `float(serialData)` to convert the incoming string to a number before using it in calculations.
+- `connectBtnClicked()` at the bottom handles opening and closing the port — **do not remove it**.
+
+#### `sketch.ino` — getting started with real sensor data
+
+- By default, the sketch sends a random number (0–1023) over Serial as a placeholder.
+- Replace `random(1024)` with a real sensor read when you're ready.
+- Make sure the baud rate in `.ino` matches `port.open()` in `sketch.js` — both are set to `9600` by default.
 
 ---
 
 ## 🧩 Libraries Reference
 
-| Library           | Included In        | Purpose                           |
-| ----------------- | ------------------ | --------------------------------- |
-| `p5.min.js`       | Both templates     | Core p5.js library                |
-| `p5.sound.min.js` | Both templates     | Audio playback and analysis       |
-| `p5.webserial.js` | `p5-arduino/` only | Serial communication with Arduino |
+| Library           | Included In        | Purpose                                         |
+| ----------------- | ------------------ | ----------------------------------------------- |
+| `p5.min.js`       | Both templates     | Core p5.js library                              |
+| `p5.sound.min.js` | Both templates     | Audio playback and analysis                     |
+| `p5.webserial.js` | `p5-arduino/` only | Serial communication with Arduino (Chrome only) |
 
 All libraries are bundled locally — no internet connection required.
 
