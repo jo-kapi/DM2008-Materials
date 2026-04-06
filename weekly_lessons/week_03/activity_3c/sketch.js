@@ -1,14 +1,19 @@
-// DM2008 — Activity 3c
-// (Painting App, 50 min)
+// DM2008 — Activity 3c [Guided]
+// Painting App (40 min)
+//
+// Each brush is its own function, stored in an array
+// Switching brushes is as simple as changing the index
+// Keys 1, 2, 3 switch brushes. C cycles color. + / - changes size. X clears.
+//
+// Stretch: add an eraser mode with E — paint using the background color instead.
 
-// 1) Palette + size
 const palette = ["#f06449", "#009988", "#3c78d8", "#eeeeee"];
 let colorIndex = 0;
 let sizeVal = 20;
 
-// 2) Brush registry (array of functions)
+// Storing brush functions in an array lets us switch between them with an index
 const brushes = [brushCircle, brushSquare, brushStreak];
-let currentBrush = 0; // 0, 1, or 2
+let currentBrush = 0;
 
 function setup() {
   createCanvas(600, 600);
@@ -17,15 +22,14 @@ function setup() {
 }
 
 function draw() {
-  // paint only while mouse is held
   if (mouseIsPressed) {
     const col = palette[colorIndex];
-    // call the selected brush function
     brushes[currentBrush](mouseX, mouseY, col, sizeVal);
   }
 }
 
-// 3) Brush functions (students can customize/extend)
+// All brush functions share the same parameters (x, y, c, s)
+// That's what makes them interchangeable in the array
 function brushCircle(x, y, c, s) {
   noStroke();
   fill(c);
@@ -44,35 +48,33 @@ function brushSquare(x, y, c, s) {
 function brushStreak(x, y, c, s) {
   stroke(c);
   strokeWeight(max(2, s / 8));
-  point(x,y);3
+  point(x, y);
 }
 
-// 4) Brush UI: select brush, cycle color, change size, clear
 function keyPressed() {
   switch (key) {
-    case '1':
-      currentBrush = 0; // circle
-      break;
-    case '2':
-      currentBrush = 1; // square
-      break; 
-    case '3':
-      currentBrush = 2; // streak
-      break;
+    case "1":
+      currentBrush = 0;
+      break; // circle
+    case "2":
+      currentBrush = 1;
+      break; // square
+    case "3":
+      currentBrush = 2;
+      break; // streak
   }
-  if (key == 'C' || key == 'c') {
-    colorIndex = (colorIndex + 1) % palette.length; // cycle color
+
+  if (key == "C" || key == "c") {
+    colorIndex = (colorIndex + 1) % palette.length;
   }
-  if (key == '+' || key == '=') {
+  if (key == "+" || key == "=") {
     sizeVal += 4;
   }
-  if (key == '-' || key == '_') {
+  if (key == "-" || key == "_") {
+    // look at reference to learn what max() does
     sizeVal = max(4, sizeVal - 4);
-  } 
-  if (key == 'X' || key == 'x') {
-    background(240); // clear canvas
-  } 
-
-  // TODO: add an 'E' (eraser) mode by painting with background color
-  // e.g., if eraserMode, use color(240) instead of palette[colorIndex]
+  }
+  if (key == "X" || key == "x") {
+    background(240);
+  }
 }

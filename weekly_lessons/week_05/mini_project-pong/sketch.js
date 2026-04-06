@@ -1,65 +1,79 @@
 // DM2008 — Mini Project
 // PONG (Starter Scaffold)
-
-// Notes for students:
-// 1) Add paddle controls (W/S and ↑/↓) inside handleInput()
-// 2) Add scoring + reset when the ball goes past a paddle
-// 3) Add win conditions / start + game-over states if you want
+//
+// Complete this scaffold into a playable game.
+// Your game should have player control, collision detection,
+// score tracking, and at least two game states.
+//
+// Not sure where to start? Try this order:
+// 1. Get both paddles moving — controls are the first thing to nail
+// 2. Get the ball moving — uncomment the velocity in the Ball constructor
+// 3. Add scoring when the ball passes a paddle, then reset the ball
+// 4. Add game states — at minimum a playing state and a game over state
+//
+// Stretch: add a start screen, a win condition, or angle variation on paddle hits.
 
 /* ----------------- Globals ----------------- */
 let leftPaddle, rightPaddle, ball;
+let leftScore = 0;
+let rightScore = 0;
+
+// Game states: "playing" or "gameover" — add more if you need them
+let gameState = "playing";
 
 /* ----------------- Setup & Draw ----------------- */
 function setup() {
   createCanvas(640, 360);
   noStroke();
-
-  // paddles: x, y, w, h
-  leftPaddle  = new Paddle(30, height/2 - 30, 10, 60);
-  rightPaddle = new Paddle(width - 40, height/2 - 30, 10, 60);
-
-  // ball starts center with a gentle push
-  ball = new Ball(width/2, height/2, 8);
+  leftPaddle = new Paddle(30, height / 2 - 30, 10, 60);
+  rightPaddle = new Paddle(width - 40, height / 2 - 30, 10, 60);
+  ball = new Ball(width / 2, height / 2, 8);
 }
 
 function draw() {
   background(18);
 
-  // 1) read input (students: add paddle movement here)
-  handleInput();
+  if (gameState === "playing") {
+    handleInput();
 
-  // 2) update world
-  leftPaddle.update();
-  rightPaddle.update();
-  ball.update();
+    leftPaddle.update();
+    rightPaddle.update();
+    ball.update();
 
-  // 3) handle collisions
-  ball.checkWallBounce();                // top/bottom
-  ball.checkPaddleBounce(leftPaddle);
-  ball.checkPaddleBounce(rightPaddle);
+    ball.checkWallBounce();
+    ball.checkPaddleBounce(leftPaddle);
+    ball.checkPaddleBounce(rightPaddle);
 
-  // 4) draw everything
-  drawCourt();
-  leftPaddle.show();
-  rightPaddle.show();
-  ball.show();
+    drawCourt();
+    leftPaddle.show();
+    rightPaddle.show();
+    ball.show();
+
+    // Display scores — look up textAlign() and textSize() in the p5.js reference
+  }
+
+  if (gameState === "gameover") {
+    // What should the player see when the game ends?
+    // How do they restart?
+  }
 }
 
 /* ----------------- Input ----------------- */
 function handleInput() {
-  // TODO (students): move paddles
-  // Example targets:
-  // - W/S to move leftPaddle up/down
-  // - UP/DOWN to move rightPaddle up/down
-  //
-  // Hints:
-  // leftPaddle.vy = -5 or 5; rightPaddle.vy = -5 or 5;
-  // Make sure to stop paddles when keys are released (see keyReleased)
+  // Left paddle: W (up) and S (down) — use keyIsDown() with the key's character code
+  // keyIsDown(87) = W, keyIsDown(83) = S
+  if (keyIsDown(87)) {
+    leftPaddle.vy = -leftPaddle.speed;
+  }
+  if (keyIsDown(83)) {
+    leftPaddle.vy = leftPaddle.speed;
+  }
+
+  // Right paddle: UP_ARROW and DOWN_ARROW — same pattern as left paddle
 }
 
 function keyReleased() {
-  // Stop paddles when keys are released (students: fill this once handleInput is added)
-  leftPaddle.vy  = 0;
+  leftPaddle.vy = 0;
   rightPaddle.vy = 0;
 }
 
@@ -69,12 +83,11 @@ class Paddle {
     this.pos = createVector(x, y);
     this.w = w;
     this.h = h;
-    this.vy = 0; // students will change this via input
+    this.vy = 0;
     this.speed = 5;
   }
 
   update() {
-    // basic vertical movement; constrained to canvas
     this.pos.y += this.vy;
     this.pos.y = constrain(this.pos.y, 0, height - this.h);
   }
@@ -89,10 +102,12 @@ class Ball {
   constructor(x, y, r) {
     this.pos = createVector(x, y);
     this.r = r;
-    // gentle random direction
+    this.xSpeed = 3.5;
+    this.ySpeed = 2.0;
+
+    // Give the ball a random starting direction to get it moving
+    // this.vel = createVector(random([-1, 1]) * this.xSpeed, random([-1, 1]) * this.ySpeed);
     this.vel = createVector(0, 0);
-    // this.vel.x = random([-1, 1]) * 3.5;
-    // this.vel.y = random([-1, 1]) * 2.0;
   }
 
   update() {
@@ -100,31 +115,31 @@ class Ball {
   }
 
   checkWallBounce() {
-    // bounce off top/bottom
+    // Bounce off top and bottom walls
     if (this.pos.y - this.r <= 0 || this.pos.y + this.r >= height) {
       this.vel.y *= -1;
       this.pos.y = constrain(this.pos.y, this.r, height - this.r);
     }
 
-    // TODO (students): detect when ball passes left or right edge.
-    // Increase a score counter and reset ball to center with a new direction.
-    // if (this.pos.x + this.r < 0) { /* right player scores */ }
-    // if (this.pos.x - this.r > width) { /* left player scores  */ }
+    // When the ball passes the left or right edge, a player scores
+    // Increment the correct score, then call this.reset()
   }
 
-  checkPaddleBounce(p) {
-    // AABB-then-circle quick check (simple & forgiving)
-    const withinY = this.pos.y > p.pos.y && this.pos.y < p.pos.y + p.h;
-    const withinX = this.pos.x + this.r > p.pos.x && this.pos.x - this.r < p.pos.x + p.w;
+  checkPaddleBounce(paddle) {
+    const withinY = this.pos.y > paddle.pos.y && this.pos.y < paddle.pos.y + paddle.h;
+    const withinX =
+      this.pos.x + this.r > paddle.pos.x && this.pos.x - this.r < paddle.pos.x + paddle.w;
 
     if (withinX && withinY) {
-      // push ball out so it doesn't get stuck
       if (this.vel.x < 0) {
-        this.pos.x = p.pos.x + p.w + this.r;
+        this.pos.x = paddle.pos.x + paddle.w + this.r;
       } else {
-        this.pos.x = p.pos.x - this.r;
+        this.pos.x = paddle.pos.x - this.r;
       }
-      this.vel.x *= -1; // reflect horizontally
+      this.vel.x *= -1;
+
+      // Stretch: add angle variation based on where the ball hits the paddle
+      // this.vel.y += (this.pos.y - paddle.pos.y - paddle.h / 2) * 0.1;
     }
   }
 
@@ -134,19 +149,18 @@ class Ball {
   }
 
   reset() {
-    // students: call this after a point is scored
-    this.pos.set(width/2, height/2);
-    this.vel.set(random([-1, 1]) * 3.5, random([-1, 1]) * 2.0);
+    this.pos.set(width / 2, height / 2);
+    // random([-1, 1]) picks randomly from an array — a handy pattern for direction
+    // this.vel.set(random([-1, 1]) * this.xSpeed, random([-1, 1]) * this.ySpeed);
   }
 }
 
-/* ----------------- UI helpers ----------------- */
+/* ----------------- UI Helpers ----------------- */
 function drawCourt() {
-  // center line
   stroke(80);
   strokeWeight(2);
   for (let y = 10; y < height; y += 18) {
-    line(width/2, y, width/2, y + 8);
+    line(width / 2, y, width / 2, y + 8);
   }
   noStroke();
 }

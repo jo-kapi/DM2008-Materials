@@ -1,5 +1,5 @@
-// DM2008
-// Activity 1b (Ryoji Ikeda)
+// DM2008 — Activity 1b [Ryoji Ikeda]
+// Learning By Making (40 min)
 
 let x;
 let w;
@@ -13,13 +13,13 @@ function setup() {
 
 function draw() {
   background(255, 10);
-  
+
   x = random(width);
   w = random(1, 10);
-  rect(x, 0, w, height/2);
-  
+  rect(x, 0, w, height / 2);
+
   x = random(width);
-  rect(x, height/2, w, height/2);
+  rect(x, height / 2, w, height / 2);
 }
 
 function keyPressed() {

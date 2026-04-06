@@ -1,28 +1,31 @@
-// DM2008 — Activity 4b
-// Objects in Motion (60 min)
+// DM2008 — Activity 4b [Guided]
+// Objects in Motion (50 min)
+//
+// You have a working Agent class to start with — your job is to bring it to life.
+// Each agent moves, changes over time, and is drawn to the screen.
+// Mouse click adds a new agent. C clears them all.
+//
+// Things to try:
+// - Change the starting values (size, speed, color) to see what happens
+// - Make agents bounce instead of wrap — what needs to change?
+// - Add a second method to your class beyond update() and show()
+//
+// Stretch: give each agent a lifespan — shrink or fade it over time, then remove it.
+// Hint: a backward loop lets you safely splice items while iterating.
 
-// ============================
-// Step 0: Global data
-// ============================
-let agents = []; // array to hold many objects
-const NUM_START = 12; // you can tweak this
+let agents = [];
+const NUM_START = 12;
 
 function setup() {
   createCanvas(600, 400);
   noStroke();
 
-  // ============================
-  // Step 1: Populate the array
-  // - Use a loop to create multiple instances
-  // - Give each instance some randomized starting values
-  // ============================
   for (let i = 0; i < NUM_START; i++) {
     let x = random(width);
     let y = random(height);
     let sz = random(12, 36);
     let speedX = random(-2, 2);
     let speedY = random(-2, 2);
-    // TODO: pass any extra properties you plan to use
     agents.push(new Agent(x, y, sz, speedX, speedY));
   }
 }
@@ -30,34 +33,12 @@ function setup() {
 function draw() {
   background(230);
 
-  // ============================
-  // Step 2: Loop through the array
-  // - Call at least TWO methods on each object
-  //   e.g., update() then show()
-  // ============================
   for (let i = 0; i < agents.length; i++) {
-    agents[i].update(); // change over time
-    agents[i].show(); // draw
-  }
-
-  // ============================
-  // Step 3 (optional but recommended):
-  // Removal / lifespan
-  // - If your objects can "die", remove them safely.
-  // - Use a backward loop to avoid skipping items when splicing.
-  // ============================
-  for (let i = agents.length - 1; i >= 0; i--) {
-    if (agents[i].life <= 0) {
-      agents.splice(i, 1);
-    }
+    agents[i].update();
+    agents[i].show();
   }
 }
 
-// ============================
-// Step 4: Interaction (optional)
-// - Add new objects with mouse clicks
-// - Toggle behaviors with keys
-// ============================
 function mousePressed() {
   let sz = random(16, 40);
   let speedX = random(-2, 2);
@@ -66,47 +47,32 @@ function mousePressed() {
 }
 
 function keyPressed() {
-  // Example toggles—feel free to customize
+  // Replacing the array with an empty one effectively clears all agents
   if (key === "C") {
-    // clear all agents
     agents = [];
   }
 }
 
-// ============================
-// Step 5: Define your Class
-// - Must have at least 1 property that changes over time
-// - Must have at least 1 method besides show()
-// - Feel free to add more properties/methods
-// ============================
 class Agent {
   constructor(x, y, sz, speedX, speedY) {
-    // Required properties
     this.x = x;
     this.y = y;
     this.sz = sz;
-
-    // Motion
     this.dx = speedX;
     this.dy = speedY;
-
-    // Style (customize!)
-    this.h = random(360);
-    this.a = 200;
-
-    // Lifespan (optional)
-    this.life = 255; // use this if you want fade/shrink/remove behavior
+    this.col = random(255); // a color value that will change over time
+    // What else might your agent need to know about itself?
   }
 
-  // Method #1: update — change over time
   update() {
-    // Basic movement
+    // Position changes by speed each frame — can you see why?
     this.x += this.dx;
     this.y += this.dy;
 
-    // Simple screen wrap (A) or bounce (B) — pick one or implement your own:
+    // This is a property changing over time — try changing size or speed instead
+    this.col = (this.col + 1) % 255;
 
-    // (A) Wrap:
+    // This wraps agents around the edges — could you make them bounce instead?
     if (this.x > width) {
       this.x = 0;
     }
@@ -119,40 +85,11 @@ class Agent {
     if (this.y < 0) {
       this.y = height;
     }
-
-    // (B) Bounce (comment Wrap out if you use Bounce):
-    // if (this.x < 0 || this.x > width) {
-    //   this.dx *= -1;
-    // }
-    // if (this.y < 0 || this.y > height) {
-    //   this.dy *= -1;
-    // }
-
-    // Example of property changing over time:
-    // subtle size pulse
-    // this.sz += sin(frameCount * 0.05) * 0.2;
-
-    // Or use a lifespan:
-    // this.life -= 1;        // fade over time
-    // this.sz -= 0.05;     // shrink slowly
   }
 
-  // Method #2: show — draw the object
   show() {
-    // If you use HSB, set colorMode(HSB) in setup()
-    // colorMode(HSB, 360, 100, 100, 255);
-    // fill(this.h, 70, 90, this.a);
-
-    // Using RGB to keep it simple
-    fill(50 + (this.h % 200), 120, 200, this.a);
+    // this.col drives the color shift — how could you use your other properties here?
+    fill(this.col, 150, 220);
     ellipse(this.x, this.y, this.sz);
   }
 }
-
-/* ============================
-   TODO ideas (pick at least one):
-   - Add a second method besides show(), e.g., bounce(), shrink(), changeColor()
-   - Make one property evolve over time (size, hue, alpha, speed)
-   - Add a key or mouse interaction that changes *all* agents (loop over array)
-   - Implement removal: shrink agents and splice them when too small
-============================= */

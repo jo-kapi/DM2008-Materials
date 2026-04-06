@@ -1,9 +1,15 @@
-// DM2008 — Activity 2a
-// (Mode Switch, 20 min)
+// DM2008 — Activity 2a [Guided]
+// Mode Switch (20 min)
+//
+// Keys 1, 2, 3 switch between modes — each one changes the background color.
+// Try extending each mode to also change the fill, size, or speed of the ellipse.
+// Keep it simple: one clear change per mode that's easy to see on screen.
+//
+// Stretch: add a 4th mode, or make the ellipse change shape between modes.
 
-let x = 0;        // ellipse x-position
-let size = 50;    // ellipse size (you can change this in your if/else)
-let bgColor;      // background color set by switch(key)
+let x = 0; // ellipse x-position
+let size = 50; // ellipse size
+let bgColor; // background color, changed by key presses
 
 function setup() {
   createCanvas(400, 400);
@@ -13,10 +19,11 @@ function setup() {
 function draw() {
   background(bgColor);
 
-  // --- Movement (base behaviour) ---
-  // The ellipse moves to the right each frame.
-  // If you decide to control speed with an if/else below,
-  // REMOVE or comment out this next line so you don't "double add" to x.
+  // Draw the ellipse at its current position
+  fill(0);
+  ellipse(x, height / 2, size);
+
+  // Move the ellipse
   x += 2;
 
   // Wrap around when it exits the right edge
@@ -24,54 +31,28 @@ function draw() {
     x = 0;
   }
 
-  // --- Your if/else goes here (choose ONE behaviour rule) ---
-  // Examples (uncomment ONE idea, or write your own):
-  //
-  // 1) Change colour on mouse press
-  // if (mouseIsPressed) {
-  //   fill(255, 0, 0);
-  // } else {
-  //   fill(0);
-  // }
-  //
-  // 2) Change size on right half
-  // if (x > width / 2) {
-  //   size = 80;
-  // } else {
-  //   size = 50;
-  // }
-  //
-  // 3) Change speed using mouse position (THEN comment out x += 2; above)
-  // if (mouseX > width / 2) {
-  //   x += 4; // faster on right
-  // } else {
-  //   x += 2; // slower on left
-  // }
-  //
-  // Keep it simple: one clear rule that is easy to see on screen.
-
-  // --- Draw the ellipse (after your if/else so changes apply this frame) ---
-  // If you didn't set fill() in your rule above, it will be black.
-  fill(0);
-  ellipse(x, height / 2, size);
-
-  // Stretch (optional, if you finish early):
-  // - Draw a rect instead of an ellipse when mouseIsPressed.
+  // --- Your if/else goes here ---
+  // Try swapping this out for your own rule.
+  if (mouseIsPressed) {
+    fill(255, 0, 0); // red on click
+  } else {
+    fill(0);
+  }
 }
 
-// --- Mode switching with number keys: 1, 2, 3 ---
+// Keys 1, 2, 3 change the background color — this is your mode switch
 function keyPressed() {
   switch (key) {
-    case '1':
-      bgColor = color(200, 100, 100); // red
-      break;
-    case '2':
-      bgColor = color(100, 200, 100); // green
-      break;
-    case '3':
-      bgColor = color(100, 100, 200); // blue
-      break;
+    case "1":
+      bgColor = color(200, 100, 100);
+      break; // red
+    case "2":
+      bgColor = color(100, 200, 100);
+      break; // green
+    case "3":
+      bgColor = color(100, 100, 200);
+      break; // blue
     default:
-      bgColor = color(220);           // grey
+      bgColor = color(220); // grey
   }
 }
