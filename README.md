@@ -38,10 +38,10 @@ Within each week, you'll find folders for specific **activities**, **readings**,
 
 Clean, ready-to-use project templates for your own sketches.
 
-- **p5-only/** → browser-based sketches
-- **p5-arduino/** → templates that include serial communication setup between Arduino and p5.js
+- **p5-only/** → simple browser-based sketches
+- **p5-arduino/** → template that includes serial communication setup between Arduino and p5.js
 
-Each folder includes its own `README.md` explaining how to use or modify the template.
+The folder includes a [`README.md`](https://github.com/jo-kapi/DM2008-Materials/tree/main/starter_templates) explaining how to use and modify the templates.
 
 ---
 
