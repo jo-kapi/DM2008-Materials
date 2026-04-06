@@ -3,6 +3,13 @@
 This repository contains all materials, templates, and examples for **DM2008: Programming for Interaction**.  
 It serves as the single reference point for in-class activities, demos, and code templates throughout the semester.
 
+> **⚠️ This is the Materials Repo. This is _not_ your submission repo.**
+>
+> This repo is **read-only** course content maintained by your instructors. You will **not** submit work here.  
+> For submitting and tracking your own work, use your personal **Student Mono-Repo** (set up in Week 7).
+
+---
+
 ## 📁 Repository Structure
 
 ### `weekly_lessons/`
@@ -23,7 +30,7 @@ Each week corresponds to a topic covered in class:
 | `week_09` | Sensor to Screen (Sensor Jam Template) |
 | `week_10` | Interface Design |
 
-Within each week, you’ll find folders for specific **activities**, **readings**, or **mini-projects** used during class. For some weeks, you may find fully implemented **demos** for you to experiment with, dissect, and learn from.
+Within each week, you'll find folders for specific **activities**, **readings**, or **mini-projects** used during class. For some weeks, you may find fully implemented **demos** for you to experiment with, explore, and learn from.
 
 ---
 
@@ -44,19 +51,20 @@ Local copies of required p5.js libraries for offline use:
 
 - `p5.min.js`
 - `p5.sound.min.js`
+- `p5.webserial.js`
 
-These are also included and linked within the starter templates.
+These are included and individually linked within the starter templates that require them.
 
 ---
 
 ### `LICENSE`
 
 Contains licensing information for instructional use.  
-All original teaching materials © jo+kapi / Nanyang Technological University, Singapore.
+All original teaching materials © jo+kapi | Nanyang Technological University, Singapore.
 
 ## 🧭 How to Use
 
-You can access the course materials in two ways:
+You can access the course materials in three ways:
 
 ### Option 1 — Using GitHub Desktop (recommended for beginners)
 
@@ -70,7 +78,7 @@ You can access the course materials in two ways:
 5. Click **Clone**.
 6. Once cloned, open the folder in **VS Code** and use **Live Server** to preview sketches in the browser.
 
-> 🪄 Use GitHub Desktop to **commit** and **push** your own project progress later in the semester (Week 7 onward).
+> 🪄 From Week 7 onward, you'll also set up your own **Student Mono-Repo** — a separate personal repo where you commit and submit your work. That is a **different repo** from _this_ one.
 
 ---
 
@@ -89,6 +97,19 @@ code .
 
 Launch **Live Server** to preview sketches in your browser.
 
+---
+
+### Option 3 — Downloading as a ZIP (no Git required)
+
+1. Go to [github.com/jo-kapi/DM2008-Materials](https://github.com/jo-kapi/DM2008-Materials).
+2. Click the green **Code** button near the top right.
+3. Select **Download ZIP**.
+4. Unzip the downloaded file and open the folder in **VS Code**.
+
+> ⚠️ Note: Downloading as a ZIP gives you a snapshot of the repo. You won't be able to pull future updates automatically — use Options 1 or 2 if you want to stay in sync.
+
+---
+
 ## 🧩 Tooling Overview
 
 - **Editor:** VS Code + Live Server
@@ -99,20 +120,20 @@ Launch **Live Server** to preview sketches in your browser.
 
 ## 📚 References
 
-- _Getting Started with p5.js_ — McCarthy, Reas, Fry (O’Reilly, 2015)
+- _Getting Started with p5.js_ — McCarthy, Reas, Fry (O'Reilly, 2015)
 - _The Nature of Code_ — Daniel Shiffman (No Starch Press, 2024)
 - _Code as a Creative Medium_ — Levin & Brain (MIT Press, 2021)
 
 ## 🧑‍🏫 About This Course
 
 **DM2008: Programming for Interaction** introduces coding as a creative practice for interaction & game designers.
-You’ll learn to think computationally, experiment fearlessly, and build interactive experiences that connect screen, sound, and sensor.
+You'll learn to think computationally, experiment fearlessly, and build interactive experiences that connect screen, sound, and sensor.
 
 The course emphasizes:
 
 - Playful experimentation
 - Confidence through process and iteration
-- Embracing debugging and “productive confusion” as part of learning
+- Embracing debugging and "productive confusion" as part of learning
 
 The accompanying slides to this course can be [viewed here](https://slides.com/kapilan-naidu/dm2008-s2-2526/fullscreen).
 
