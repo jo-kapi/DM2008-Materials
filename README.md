@@ -3,7 +3,7 @@
 This repository contains all materials, templates, and examples for **DM2008: Programming for Interaction**.  
 It serves as the single reference point for in-class activities, demos, and code templates throughout the semester.
 
-> **⚠️ This is the Materials Repo. This is _not_ your submission repo.**
+> **⚠️ This is the Materials Repo. This is _not_ your submission repo template.**
 >
 > This repo is **read-only** course content maintained by your instructors. You will **not** submit work here.  
 > For submitting and tracking your own work, use your personal **Student Mono-Repo** (set up in Week 7).
@@ -135,7 +135,7 @@ The course emphasizes:
 - Confidence through process and iteration
 - Embracing debugging and "productive confusion" as part of learning
 
-The accompanying slides to this course can be [viewed here](https://slides.com/kapilan-naidu/dm2008-s2-2526/fullscreen).
+The accompanying slides to this course can be [viewed here](https://slides.com/kapilan-naidu/dm2008-ay-2627/fullscreen).
 
 ---
 
