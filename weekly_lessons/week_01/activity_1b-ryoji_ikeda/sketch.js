@@ -1,5 +1,5 @@
 // DM2008 — Activity 1b [Ryoji Ikeda]
-// Learning By Making (40 min)
+// Learning By Making (30 min)
 
 let x;
 let w;
