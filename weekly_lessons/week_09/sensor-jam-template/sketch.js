@@ -28,20 +28,26 @@ function draw() {
       // disable logging to improve performance
       console.log(sensorVal);
 
-      // OPTION 1:
-      // Update circle's size with sensor's data directly
-      // Reduce delay() value in Ardiuno to get smoother changes
+      // use float() to convert the data from string to number
+      // (Arduino must send ONE number per line, e.g. Serial.println(distVal))
+      let val = float(sensorVal);
 
-      // use float() to convert from data from string to number
-      // circleSize = float(sensorVal);
+      // Ignore anything that isn't a number (e.g. stray text or a partial line)
+      if (!isNaN(val)) {
+        // OPTION 1:
+        // Update circle's size with sensor's data directly
+        // Reduce delay() value in Arduino to get smoother changes
+        // circleSize = val;
 
-      // OPTION 2:
-      // Update circle's size using lerp() to smoothly change values
-      // This method even works with longer delay() values in Arduino
+        // OPTION 2:
+        // Update circle's size using lerp() to smoothly change values
+        // This method even works with longer delay() values in Arduino
 
-      targetSize = float(sensorVal);
-      // last value in lerp() controls speed of change
-      circleSize = lerp(circleSize, targetSize, 0.1);
+        // map distance (5-100cm) to circle size: closer = bigger
+        targetSize = map(val, 5, 100, 400, 50);
+        // last value in lerp() controls speed of change
+        circleSize = lerp(circleSize, targetSize, 0.1);
+      }
     }
   }
 }

@@ -13,28 +13,33 @@ const int usSensorPin = A0;
 const float usMaxRange = 520.0;
 const float dataSize = 1023.0;
 
+// TODO: declare your LED pin here (must be a PWM pin, marked with ~)
+// const int ledPin = 9;
+
 float sensorVal, distVal;
 int brightness = 0;
 
 void setup() {
   Serial.begin(9600);
-  // Set up your LED pin here
+  // TODO: set up your LED pin here (hint: pinMode)
 }
 
 void loop() {
   sensorVal = analogRead(usSensorPin);
   distVal = sensorVal * usMaxRange / dataSize;
 
-  // Clamp to the sensor's reliable range
-  if (distVal < 2)   distVal = 2;
-  if (distVal > 500) distVal = 500;
+  // Clamp to a range that suits a desk / classroom setup (cm)
+  if (distVal < 5)   distVal = 5;
+  if (distVal > 100) distVal = 100;
 
   // map() rescales a value from one range to another
-  // here: distance (2–500cm) becomes brightness (0–255)
-  brightness = map(distVal, 2, 500, 0, 255);
+  // here: distance (5–100cm) becomes brightness (255–0)
+  // the output range is flipped so that CLOSER = BRIGHTER
+  // (note: Arduino's map() uses whole numbers, so decimals are dropped)
+  brightness = map(distVal, 5, 100, 255, 0);
   brightness = constrain(brightness, 0, 255);
 
-  // Use analogWrite() to send brightness to your LED pin
+  // TODO: use analogWrite() to send brightness to your LED pin
   // analogWrite(ledPin, brightness);
 
   Serial.print(distVal);
@@ -42,5 +47,5 @@ void loop() {
   Serial.print("Brightness: ");
   Serial.println(brightness);
 
-  delay(500);
+  delay(50);
 }
