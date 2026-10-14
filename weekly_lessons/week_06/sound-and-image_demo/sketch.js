@@ -1,14 +1,14 @@
 let img, img2, sound;
 
-function preload() {
-  // Load your own files here
-  img = loadImage("assets/chat.png");
-  img2 = loadImage("assets/notification.png");
-  sound = loadSound("assets/notified.mp3");
-}
-
-function setup() {
+// An async setup() lets us await file loading — draw() won't start until setup() finishes
+async function setup() {
   createCanvas(400, 400);
+
+  // Load your own files here
+  img = await loadImage("assets/chat.png");
+  img2 = await loadImage("assets/notification.png");
+  sound = await loadSound("assets/notified.mp3");
+
   imageMode(CENTER); // draw image from its center
 }
 

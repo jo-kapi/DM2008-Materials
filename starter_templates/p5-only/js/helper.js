@@ -57,6 +57,8 @@ function viewportResized() {
     _isFullscreenCanvas = width === windowWidth && height === windowHeight;
   }
   if (_isFullscreenCanvas) {
-    resizeCanvas(windowWidth, windowHeight);
+    // p5 updates windowWidth/windowHeight in its own resize listener, which runs
+    // after this one — wait a frame so we resize to the new size, not the old one
+    requestAnimationFrame(() => resizeCanvas(windowWidth, windowHeight));
   }
 }
