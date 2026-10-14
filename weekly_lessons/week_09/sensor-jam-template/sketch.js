@@ -1,5 +1,6 @@
 let port; // Serial Communication port
 let connectBtn;
+let wasOpened = false; // tracks port state to update the button label
 
 let sensorVal;
 let circleSize = 50;
@@ -18,6 +19,8 @@ function setup() {
 function draw() {
   background(100);
   ellipse(width / 2, height / 2, circleSize);
+
+  updateConnectBtn();
 
   // Receive data from Arduino
   if (port.opened()) {
@@ -53,16 +56,28 @@ function draw() {
 }
 
 // DO NOT REMOVE THIS FUNCTION
-function connectBtnClick(e) {
+function connectBtnClick() {
   // If port is not already open, open on click,
   // otherwise close the port
+  // (the button label is updated in updateConnectBtn())
   if (!port.opened()) {
     port.open(9600); // opens port with Baud Rate of 9600
-    e.target.innerHTML = "Disconnect Arduino";
-    e.target.classList.add("connected");
   } else {
     port.close();
-    e.target.innerHTML = "Connect to Arduino";
-    e.target.classList.remove("connected");
+  }
+}
+
+// Keeps the button in sync with the real port state, since opening is
+// asynchronous and can fail (picker cancelled, port busy, board unplugged)
+function updateConnectBtn() {
+  let isOpened = port.opened();
+  if (isOpened === wasOpened) return;
+  wasOpened = isOpened;
+
+  connectBtn.html(isOpened ? "Disconnect Arduino" : "Connect to Arduino");
+  if (isOpened) {
+    connectBtn.addClass("connected");
+  } else {
+    connectBtn.removeClass("connected");
   }
 }
